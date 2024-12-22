@@ -29,7 +29,7 @@ El sistema está diseñado para ser simple y eficiente, con pruebas unitarias qu
 * Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/usuario/proyecto-jwt.git
+   git clone https://github.com/Cainabel1910/GlobalLogic
    
 ### Construcción del Proyecto
 * Compilación: Utiliza Maven para construir el proyecto y sus dependencias. 
