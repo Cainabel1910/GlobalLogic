@@ -16,6 +16,19 @@ El sistema está diseñado para ser simple y eficiente, con pruebas unitarias qu
 - **Mockito**: Para crear mocks en las pruebas unitarias
 - **H2**: Base de datos en memoria
 
+## Documentacion
+Se ha generado un swagger que documenta los endpoint de auth. 
+
+http://localhost:9090/swagger-ui/index.htm
+
+## Test
+Se han incluido los siguientes Test:
+- testRegister -> Registro exitoso
+- testRegisterBadEmail -> El email no cumple con el formato requerido.
+- testRegisterBadPassword -> La contraseña no cumple con el formato requerido.
+- testRegisterEmailRegistrado -> El Email ya se encuentra registrado.
+- testLogin_CredencialesIncorrectas -> Login con credenciales incorrectas.
+
 ## Requisitos
 
 - **Java 11** o superior.
@@ -29,7 +42,7 @@ El sistema está diseñado para ser simple y eficiente, con pruebas unitarias qu
 * Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/Cainabel1910/GlobalLogic
+   git clone https://github.com/usuario/proyecto-jwt.git
    
 ### Construcción del Proyecto
 * Compilación: Utiliza Maven para construir el proyecto y sus dependencias. 
