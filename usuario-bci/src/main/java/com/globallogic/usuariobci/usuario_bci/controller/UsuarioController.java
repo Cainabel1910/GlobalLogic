@@ -45,7 +45,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/obtener/{id}")
     public ResponseEntity<?> detalle(@PathVariable UUID id){
         Optional<Usuario> usuarioOptional = usuarioService.porId(id);
         if(usuarioOptional.isPresent()){
@@ -55,7 +55,7 @@ public class UsuarioController {
                 .singletonMap("mensaje","No se encontro la informacion del usuario."));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/modificar/{id}")
     public ResponseEntity<?> editar(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable UUID id){
         if (result.hasErrors()){
             return validar(result);
@@ -122,7 +122,7 @@ public class UsuarioController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable UUID id){
         Optional<Usuario> usuarioOptional = usuarioService.porId(id);
         if(usuarioOptional.isPresent()){

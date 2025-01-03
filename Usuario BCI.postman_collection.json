@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "d03b3214-188f-4461-b46b-76cb3b0fd0aa",
+		"name": "Usuario BCI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9594876"
+	},
+	"item": [
+		{
+			"name": "Register BCI",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bismark Lozada\",\r\n    \"email\": \"blozada@mail.com\",\r\n    \"password\": \"A1a3asdrefty\",\r\n    \"phones\": [\r\n        {\r\n            \"number\": 1234567,\r\n            \"cityCode\": 1,\r\n            \"countryCode\": \"57\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/auth/sing-up",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"auth",
+						"sing-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login BCI",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"blozada@mail.com\",\r\n    \"password\": \"A1a3asdrefty\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -31,13 +31,22 @@ public class AuthController {
     @Autowired
     private UsuarioService usuarioService;
 
+
     @PostMapping(value = "login")
-    public ResponseEntity<UsuarioResponse> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<?> login(@RequestBody LoginRequest request, BindingResult result) {
+        // Verificamos si el correo se encuentra registrado
+        if (!usuarioService.porEmail(request.getEmail()).isPresent()) {
+            return buildErrorResponse(HttpStatus.BAD_REQUEST, "Credenciales Incorrectas.");
+        }
+        try{
+            return ResponseEntity.ok(authService.login(request));
+        } catch (Exception e){
+            return buildErrorResponse(HttpStatus.BAD_REQUEST, "Error al loguearse.");
+        }
     }
 
     @PostMapping(value = "sing-up")
-    public ResponseEntity<?> register(@Valid @RequestBody Usuario request, BindingResult result) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request, BindingResult result) {
         //Verificamos que los datos esten correctos
         if (result.hasErrors()){
             return validar(result);
@@ -46,17 +55,22 @@ public class AuthController {
         if (!emailValidationService.validateEmail(request.getEmail())) {
             return buildErrorResponse(HttpStatus.BAD_REQUEST, "El correo electrónico no cumple con el formato requerido.");
         }
+        // Verificamos si la contraseña cumple con el formato
+        if (!passwordValidationService.validatePassword(request.getPassword())) {
+            return buildErrorResponse(HttpStatus.BAD_REQUEST, "La contraseña no cumple con el formato requerido.");
+        }
 
         // Verificamos si el correo se encuentra registrado
         if (usuarioService.porEmail(request.getEmail()).isPresent()) {
             return buildErrorResponse(HttpStatus.BAD_REQUEST, "El correo ya está registrado.");
         }
 
-        // Verificamos si la contraseña cumple con el formato
-        if (!passwordValidationService.validatePassword(request.getPassword())) {
-            return buildErrorResponse(HttpStatus.BAD_REQUEST, "La contraseña no cumple con el formato requerido.");
-        }
-        return ResponseEntity.ok(authService.register(request));
+        Usuario usuarioAux = new Usuario();
+        usuarioAux.setName(request.getName());
+        usuarioAux.setEmail(request.getEmail());
+        usuarioAux.setPassword(request.getPassword());
+        usuarioAux.setPhones(request.getPhones());
+        return ResponseEntity.ok(authService.register(usuarioAux));
     }
 
     private static ResponseEntity<Map<String, Object>> validar(BindingResult result) {

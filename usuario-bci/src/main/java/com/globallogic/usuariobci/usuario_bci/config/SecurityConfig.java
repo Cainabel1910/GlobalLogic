@@ -29,11 +29,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         RequestMatcher h2ConsoleMatcher = new AntPathRequestMatcher("/h2-console/**");
         RequestMatcher authMatcher = new AntPathRequestMatcher("/auth/**");
+        RequestMatcher swaggerMatcher = new AntPathRequestMatcher("/**");
+        RequestMatcher docsMatcher = new AntPathRequestMatcher("/v2/api-docs/**");
+        RequestMatcher sresourcesMatcher = new AntPathRequestMatcher("**/swagger-resources/**");
 
-            return http.csrf(csrf -> csrf.disable())
+
+        return http.csrf(csrf -> csrf.disable())
                     .authorizeHttpRequests(authRequest  -> {
                                 authRequest
-                                        .requestMatchers(h2ConsoleMatcher, authMatcher).permitAll()
+                                        .requestMatchers(h2ConsoleMatcher, authMatcher, swaggerMatcher, docsMatcher,sresourcesMatcher).permitAll()
                                         .anyRequest().authenticated();
                             }
                          )
@@ -44,3 +48,5 @@ public class SecurityConfig {
                     .build();
     }
 }
+
+

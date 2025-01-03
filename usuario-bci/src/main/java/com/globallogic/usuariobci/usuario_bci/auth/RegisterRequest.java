@@ -1,18 +1,34 @@
 package com.globallogic.usuariobci.usuario_bci.auth;
 
-public class RegisterRequest {
-    String username;
-    String password;
-    String firstname;
-    String lastname;
-    String country;
+import com.globallogic.usuariobci.usuario_bci.model.Telefono;
 
-    public String getUsername() {
-        return username;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
+
+public class RegisterRequest {
+    private String name;
+    @NotBlank
+    private String email;
+
+    @NotBlank
+    private String password;
+
+    private List<Telefono> phones;
+
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -23,27 +39,11 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public List<Telefono> getPhones() {
+        return phones;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setPhones(List<Telefono> phones) {
+        this.phones = phones;
     }
 }
