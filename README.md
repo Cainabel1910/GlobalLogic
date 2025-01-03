@@ -17,7 +17,17 @@ El sistema está diseñado para ser simple y eficiente, con pruebas unitarias qu
 - **H2**: Base de datos en memoria
 
 ## Documentacion
+Se ha generado un swagger que documenta los endpoint de auth. 
+
 http://localhost:9090/swagger-ui/index.htm
+
+## Test
+Se han incluido los siguientes Test:
+- testRegister -> Registro exitoso
+- testRegisterBadEmail -> El email no cumple con el formato requerido.
+- testRegisterBadPassword -> La contraseña no cumple con el formato requerido.
+- testRegisterEmailRegistrado -> El Email ya se encuentra registrado.
+- testLogin_CredencialesIncorrectas -> Login con credenciales incorrectas.
 
 ## Requisitos
 
